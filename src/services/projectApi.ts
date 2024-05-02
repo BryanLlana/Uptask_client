@@ -3,7 +3,8 @@ import { ProjectFormData } from "../types"
 
 export const createProject = async (formData: ProjectFormData) => {
   try {
-    await api.post('/project', formData)
+    const { data } = await api.post('/project', formData)
+    return data
   } catch (error) {
     console.log(error)
   }
