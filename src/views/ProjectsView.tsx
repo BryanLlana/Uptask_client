@@ -64,7 +64,7 @@ const ProjectsView = () => {
                         </Link>
                       </Menu.Item>
                       <Menu.Item>
-                        <Link to={``}
+                        <Link to={`/projects/edit/${project._id}`}
                           className='block px-3 py-1 text-sm leading-6 text-gray-900'>
                           Editar Proyecto
                         </Link>
