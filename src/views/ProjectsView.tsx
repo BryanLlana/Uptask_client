@@ -2,14 +2,27 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { Link } from "react-router-dom"
-import { useQuery } from '@tanstack/react-query'
-import { getProjects } from "@/services/projectApi"
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { deleteProject, getProjects } from "@/services/projectApi"
 import Spinner from "@/components/Spinner"
+import { toast } from 'react-toastify'
 
 const ProjectsView = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['projects'],
     queryFn: getProjects
+  })
+
+  const queryClient = useQueryClient()
+  const mutation = useMutation({
+    mutationFn: deleteProject,
+    onSuccess: data => {
+      queryClient.invalidateQueries({ queryKey: ['projects'] })
+      toast.success(data.message)
+    },
+    onError: error => {
+      toast.error(error.message)
+    }
   })
 
   if (isLoading) return <Spinner />
@@ -73,7 +86,7 @@ const ProjectsView = () => {
                         <button
                           type='button'
                           className='block px-3 py-1 text-sm leading-6 text-red-500'
-                          onClick={() => { }}
+                          onClick={() => mutation.mutate(project._id)}
                         >
                           Eliminar Proyecto
                         </button>
