@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getProject } from "@/services/projectApi"
 import Spinner from "@/components/Spinner"
 import CreateTaskModal from "@/components/tasks/CreateTaskModal"
+import TaskList from "@/components/tasks/TaskList"
 
 const ProjectDetailsView = () => {
   const navigate = useNavigate()
@@ -12,8 +13,7 @@ const ProjectDetailsView = () => {
     queryFn: () => getProject(id!),
     retry: false
   })
-  
-  
+
   if (isLoading) return <Spinner />
   if (isError) return <Navigate to='/404' />
   if (data) return (
@@ -30,6 +30,7 @@ const ProjectDetailsView = () => {
         </button>
       </nav>
 
+      <TaskList tasks={data.tasks} />
       <CreateTaskModal />
     </>
   )
