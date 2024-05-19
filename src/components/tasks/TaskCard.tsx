@@ -1,8 +1,11 @@
+import { deleteTaskById } from "@/services/taskApi"
 import { Task } from "@/types/index"
 import { Menu, Transition } from "@headlessui/react"
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { Fragment } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 type Props = {
   task: Task
@@ -11,6 +14,15 @@ type Props = {
 const TaskCard = ({ task }: Props) => {
   const navigate = useNavigate()
   const location = useLocation()
+
+  const queryClient = useQueryClient()
+  const { mutate } = useMutation({
+    mutationFn: deleteTaskById,
+    onSuccess: data => {
+      toast.success(data.message)
+      queryClient.invalidateQueries({ queryKey: ['project', task.project] })
+    }
+  })
 
   return (
     <li className="p-5 bg-white border border-slate-300 flex justify-between gap-3">
@@ -48,8 +60,11 @@ const TaskCard = ({ task }: Props) => {
               </Menu.Item>
 
               <Menu.Item>
-                <button type='button' className='block px-3 py-1 text-sm leading-6 text-red-500'>
-                  Eliminar Tarea
+                <button
+                  type='button'
+                  className='block px-3 py-1 text-sm leading-6 text-red-500'
+                  onClick={() => mutate({ taskId: task._id, projectId: task.project })}
+                >Eliminar Tarea
                 </button>
               </Menu.Item>
             </Menu.Items>

@@ -34,3 +34,14 @@ export const updateTaskById = async ({taskId, projectId, formData}: { taskId: Ta
     }
   }
 }
+
+export const deleteTaskById = async ({ taskId, projectId}: {taskId: Task['_id'], projectId: Project['_id']}) => {
+  try {
+    const {data} = await api.delete(`/task/${projectId}/${taskId}`)
+    return data
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error)
+    }
+  }
+}
