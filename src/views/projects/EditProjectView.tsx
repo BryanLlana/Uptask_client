@@ -7,7 +7,7 @@ import ProjectEditForm from "@/components/projects/ProjectEditForm"
 const EditProjectView = () => {
   const { id } = useParams()
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['project', id],
+    queryKey: ['editProject', id],
     queryFn: () => getProject(id!),
     retry: false
   })

@@ -30,7 +30,7 @@ const CreateTaskModal = () => {
   const { mutate } = useMutation({
     mutationFn: createTask,
     onSuccess: (data) => {
-      queryClient.invalidateQueries({queryKey: ['editProject', id]}),
+      queryClient.invalidateQueries({queryKey: ['project', id]}),
       toast.success(data.message)
       reset()
       navigate(location.pathname, { replace: true })

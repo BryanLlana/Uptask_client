@@ -4,12 +4,13 @@ import { getProject } from "@/services/projectApi"
 import Spinner from "@/components/Spinner"
 import CreateTaskModal from "@/components/tasks/CreateTaskModal"
 import TaskList from "@/components/tasks/TaskList"
+import EditTaskData from "@/components/tasks/EditTaskData"
 
 const ProjectDetailsView = () => {
   const navigate = useNavigate()
   const { id } = useParams()
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['editProject', id],
+    queryKey: ['project', id],
     queryFn: () => getProject(id!),
     retry: false
   })
@@ -32,6 +33,7 @@ const ProjectDetailsView = () => {
 
       <TaskList tasks={data.tasks} />
       <CreateTaskModal />
+      <EditTaskData />
     </>
   )
 }
