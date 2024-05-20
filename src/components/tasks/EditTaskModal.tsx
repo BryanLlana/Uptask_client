@@ -25,8 +25,9 @@ export default function EditTaskModal({ task }: Props) {
   const { mutate } = useMutation({
     mutationFn: updateTaskById,
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['project', task.project]}),
       toast.success(data.message)
+      queryClient.invalidateQueries({ queryKey: ['project', task.project]})
+      queryClient.invalidateQueries({ queryKey: ['task', task._id]})
       reset()
       navigate(location.pathname, { replace: true })
     }

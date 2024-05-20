@@ -45,3 +45,14 @@ export const deleteTaskById = async ({ taskId, projectId}: {taskId: Task['_id'],
     }
   }
 }
+
+export const updateStatusTaskById = async ({taskId, projectId, status}: { taskId: Task['_id'], projectId: Project['_id'], status: Task['status'] }) => {
+  try {
+    const { data } = await api.patch(`/task/${projectId}/${taskId}`, { status })
+    return data
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error)
+    }
+  }
+}
