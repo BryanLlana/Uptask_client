@@ -5,6 +5,7 @@ import Spinner from "@/components/Spinner"
 import CreateTaskModal from "@/components/tasks/CreateTaskModal"
 import TaskList from "@/components/tasks/TaskList"
 import EditTaskData from "@/components/tasks/EditTaskData"
+import TaskModalDetails from "@/components/tasks/TaskModalDetails"
 
 const ProjectDetailsView = () => {
   const navigate = useNavigate()
@@ -34,6 +35,7 @@ const ProjectDetailsView = () => {
       <TaskList tasks={data.tasks} />
       <CreateTaskModal />
       <EditTaskData />
+      <TaskModalDetails />
     </>
   )
 }
