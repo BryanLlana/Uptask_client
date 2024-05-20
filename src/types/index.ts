@@ -1,5 +1,17 @@
 import { z } from 'zod'
 
+//* Auth & user
+const AuthSchema = z.object({
+  name: z.string(),
+  email: z.string(),
+  password: z.string(),
+  password2: z.string()
+})
+
+export type Auth = z.infer<typeof AuthSchema>
+export type UserLoginForm = Pick<Auth, 'email' | 'password'>
+export type UserRegistrationForm = Pick<Auth, 'name' | 'email' | 'password' | 'password2'>
+
 //* Tasks
 export const TaskStatusSchema = z.enum(['pending', 'onHold', 'inProgress', 'underReview', 'completed'])
 export type TaskStatus = z.infer<typeof TaskStatusSchema>
