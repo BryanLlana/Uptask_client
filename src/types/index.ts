@@ -14,6 +14,8 @@ export type UserLoginForm = Pick<Auth, 'email' | 'password'>
 export type UserRegistrationForm = Pick<Auth, 'name' | 'email' | 'password' | 'password2'>
 export type ConfirmToken = Pick<Auth, 'token'>
 export type RequestConfirmationCodeForm = Pick<Auth, 'email'>
+export type ForgotPasswordForm = Pick<Auth, 'email'>
+export type NewPasswordForm = Pick<Auth, 'password' | 'password2'>
 
 //* Tasks
 export const TaskStatusSchema = z.enum(['pending', 'onHold', 'inProgress', 'underReview', 'completed'])
