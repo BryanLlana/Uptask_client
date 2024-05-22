@@ -71,6 +71,7 @@ export const updatePassword = async( {formData, token}: {formData: NewPasswordFo
 export const login = async (formData: UserLoginForm) => {
   try {
     const { data } = await api.post('/auth/login', formData)
+    localStorage.setItem('tokenAuth', data.token)
     return data
   } catch (error) {
     if (isAxiosError(error) && error.response) {
