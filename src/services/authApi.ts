@@ -79,3 +79,14 @@ export const login = async (formData: UserLoginForm) => {
     }
   }
 }
+
+export const getUser = async () => {
+  try {
+    const { data } = await api.get('/auth/user')
+    return data
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error)
+    }
+  }
+}

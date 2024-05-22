@@ -13,7 +13,8 @@
       "@/types/*": ["types/*"],
       "@/lib/*": ["lib/*"],
       "@/services/*": ["services/*"],
-      "@/helpers/*": ["helpers/*"]
+      "@/helpers/*": ["helpers/*"],
+      "@/hooks/*": ["hooks/*"]
     },
 
     /* Bundler mode */
