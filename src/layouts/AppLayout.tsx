@@ -19,7 +19,7 @@ const AppLayout = () => {
               <Logo />
             </Link>
           </div>
-          <NavMenu />
+          <NavMenu user={data!} />
         </div>
       </header>
 
